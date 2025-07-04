@@ -1,7 +1,9 @@
 from stats import count_words, count_char, sort_char
+import sys
 
 def main():
-    book_path = "books/frankenstein.txt"
+    validate_args()
+    book_path = sys.argv[1]
     text = get_book_text(book_path)
     total_words = count_words(text)
     chars_dict = count_char(text)
@@ -9,7 +11,7 @@ def main():
     report(book_path, total_words, chars_sorted)
     
 def get_book_text(path):
-    with open("books/frankenstein.txt") as f:
+    with open(path) as f:
         return f.read()
 
 def report(book_path, count_words, sort_char):
@@ -23,5 +25,9 @@ def report(book_path, count_words, sort_char):
             print(f"{i['char']}: {i['num']}")
     print("============= END ===============")
 
+def validate_args():
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
 
 main()
