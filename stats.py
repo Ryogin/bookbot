@@ -1,21 +1,27 @@
-def get_book_text():
-    with open("books/frankenstein.txt") as f:
-        file_contents = f.read()
-        return file_contents
-
-def count_words():
-    words = get_book_text().split()
+def count_words(text):
+    words = text.split()
     return len(words)
 
-def count_letters():
-    text = get_book_text().lower()
-    letters = {}
-    for letter in text:
-        if letter in letters:
-            letters[letter] += 1
+def count_char(text):
+    chars = {}
+    for char in text.lower():
+        if char in chars:
+            chars[char] += 1
         else:
-            letters[letter] = 1
-    return letters
+            chars[char] = 1
+    return chars
+
+def sort_char(count_char):
+    sort_list = []
+    for char, num in count_char.items():
+        sort_list.append({"char":char, "num":num})
+    sort_list.sort(reverse=True, key=lambda x: x["num"])
+    return sort_list
+
+
+
+
+
 
 
 
